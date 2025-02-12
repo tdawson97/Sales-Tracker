@@ -1,0 +1,250 @@
+<!--https://github.com/livebloggerofficial/Donut-Chart-->
+<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_click-->
+
+<html>
+  <head>
+    <title>Home</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+
+
+  <body>
+
+<!--creating the nav bar-->  
+  <div class="nav">
+    <a href="/home">Home</a>
+    <a href="/employees">Employees</a>
+    <a href="/items">Items</a>
+    <a href="/sales">Sales</a>
+    <a href="/help">Help</a>
+    <a href="/">Log Out</a>
+  </div>
+
+<!--creating the item sales chart-->
+  <div class="item-sales-chart">
+    <h2 class="item-heading" id="item-heading">Item Sales</h2>
+    <div class="item-stats" id="item-stats">
+
+      <div class="chart-container">
+        <canvas class="item-chart"></canvas>
+      </div>
+      
+      <!--creating the dropdown-->
+      <div class="x">
+      <div class="dropdown">
+        <button class="dropbtn"
+        onclick="itemFunction()">Total Sales By 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+          <a id="item-e" href="#">Employee</a> <!--ADD HREFS HERE-->
+          <a id="item-i" href="#">Item</a>
+        </div>
+      </div>
+
+      <!--creating the legend-->
+      <div class="item-details">
+        <ul class="item-list"></ul>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--creating the employees chart-->
+  <div class="emp-sales-chart">
+    <h2 class="emp-heading" id="emp-heading">Team Sales</h2>
+    <div class="emp-stats" id="emp-stats">
+
+      <div class="chart-container">
+        <canvas class="emp-chart"></canvas>
+      </div>
+      
+      <!--creating the dropdown-->
+      <div class="x">
+      <div class="dropdown">
+        <button class="dropbtn"
+        onclick="empFunction()">Total Sales By 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="empDropdown">
+          <a id="emp-e" href="#">Employee</a> <!--ADD HREFS HERE-->
+          <a id="emp-i" href="#">Item</a>
+        </div>
+      </div>
+
+      <!--creating the legend-->
+      <div class="emp-info">
+        <ul class="emp-list"></ul>
+      </div>
+    </div>
+  </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_click
+
+      function itemFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+        var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
+        }
+      }
+
+      function empFunction() {
+        document.getElementById("empDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+        var empDropdown = document.getElementById("empDropdown");
+        var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show') || empDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+            empDropdown.classList.remove('show');
+          }
+        }
+      }
+
+      //https://github.com/livebloggerofficial/Donut-Chart
+
+
+      const itemData = {
+        labels: ["Chair", "Rug", "Sofa", "Dining Table", "Bookcase"],
+        data: [30, 17, 10, 7, 36],
+      };
+      const empData = {
+        labels: ["John Doe", "Beatrice Bello", "Clara Medlin", "Ronald Lewis", "Lisette Wood"],
+        data: [15, 18, 26, 22, 19],
+      };
+
+      const itemChart = document.querySelector(".item-chart");
+      const itemLegend = document.querySelector(".item-stats .item-details .item-list");
+
+      const empChart = document.querySelector(".emp-chart");
+      const empLegend = document.querySelector(".emp-stats .emp-info .emp-list")
+
+      new Chart(itemChart, {
+        type: "doughnut",
+        data: {
+          labels: itemData.labels,
+          datasets: [
+            {
+              label: "Item Sales",
+              data: itemData.data,
+            },
+          ],
+        },
+        options: {
+          borderWidth: 10,
+          borderRadius: 2,
+          hoverBorderWidth: 0,
+          plugins: {
+            legend: {
+              display: false,
+              },
+            },  
+          },
+        },
+      );
+
+      new Chart(empChart, {
+        type: "doughnut",
+        data: {
+          labels: empData.labels,
+          datasets: [
+            {
+              label: "Employee Sales",
+              data: empData.data,
+            },
+          ],
+        },
+        options: {
+          borderWidth: 10,
+          borderRadius: 2,
+          hoverBorderWidth: 0,
+          plugins: {
+            legend: {
+              display: false,
+              },
+            },  
+          },
+        },
+      );
+
+      const populateItemLegend = () => {
+        itemData.labels.forEach((l, i) => {
+          let li = document.createElement("li");
+          li.innerHTML = `${l}: <span class='percentage'>${itemData.data[i]}%</span>`;
+          itemLegend.appendChild(li);
+        });
+      };
+
+      const populateEmployeeLegend = () => {
+        empData.labels.forEach((l, i) => {
+          let li = document.createElement("li");
+          li.innerHTML = `${l}: <span class='percentage'>${empData.data[i]}%</span>`;
+          empLegend.appendChild(li);
+        });
+      };
+
+
+
+      populateItemLegend();
+      populateEmployeeLegend();
+    </script>
+    <script>
+      const itemE = document.getElementById('item-e');
+      const itemI = document.getElementById('item-i');
+      const empE = document.getElementById('emp-e');
+      const empI = document.getElementById('emp-i');
+
+      const itemHead = document.getElementById('item-heading');
+      const empHead = document.getElementById('emp-heading');
+      const itemStats = document.getElementById('item-stats');
+      const empStats = document.getElementById('emp-stats');
+
+      itemE.addEventListener('click', () => {
+        itemHead.style.display = 'none';
+        itemStats.style.display = 'none';
+        empHead.style.display = 'block';
+        empStats.style.display = 'flex';
+      });
+
+      itemI.addEventListener('click', () => {
+        empHead.style.display = 'none';
+        empStats.style.display = 'none';
+        itemHead.style.display = 'block';
+        itemStats.style.display = 'flex';
+      });
+
+      empE.addEventListener('click', () => {
+        itemHead.style.display = 'none';
+        itemStats.style.display = 'none';
+        empHead.style.display = 'block';
+        empStats.style.display = 'flex';
+      });
+
+      empI.addEventListener('click', () => {
+        empHead.style.display = 'none';
+        empStats.style.display = 'none';
+        itemHead.style.display = 'block';
+        itemStats.style.display = 'flex';
+      });
+    </script>
+
+    
+ 
+  </body>
+</html>

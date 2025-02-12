@@ -1,0 +1,244 @@
+<html>
+  <head>
+    <title>Items</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+<!--creating the nav bar-->  
+    <div class="nav">
+      <a href="/home">Home</a>
+      <a href="/employees">Employees</a>
+      <a href="/items">Items</a>
+      <a href="/sales">Sales</a>
+      <a href="/help">Help</a>
+      <a href="/">Log Out</a>
+    </div>
+
+    <div class="page">
+    <h2 class="heading">Items</h2>
+
+<!--creating search and add bar-->
+    <div>
+      <form method="POST" action="/items">
+        <input name="search" class="search-bar" type="text" placeholder="Search by item or ID">
+        <button name="search-form" class="search-button" type="submit">Search</button>
+      </form>
+      <button id="openPopup" class="add">Add</button>
+
+
+<!--creating the add item popup-->
+        <div id="popup" class="popup">
+          <div class="popup-content">
+            
+            <h2>Item Details</h2>
+
+            <form method="POST" action="/items">
+            
+            <div class="input-fields">
+
+              <label for="item">Item:</label>
+              <input type="text" id="item" name="item"><br><br>
+
+              <label for="itemID">Item ID:</label>
+              <input type="number" id="itemID" name="itemID"><br><br>
+
+              <label for="price">Price:</label>
+              <input type="number" id="price" name="price"><br><br>
+
+              <label for="cost">Cost:</label>
+              <input type="number" id="cost" name="cost"><br><br>
+
+              <label for="inventory">Inventory:</label>
+              <input type="number" id="inventory" name="inventory"><br><br>
+
+              <label for="contact">Order Contact:</label>
+              <input type="tel" id="contact" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+
+              <input type="hidden" name="userID" value="1">
+
+            </div>
+            
+            <button id="closePopup" href="#">Add Item</button>
+            
+          </form>
+
+          </div>
+        </div>
+
+<!--creating the edit item popup-->
+        {% for row in items %}
+        <div id="edit_popup_{{ row[0]  }}" class="edit-popup">
+          <div class="popup-content">
+              
+            <h2>Item Details</h2>
+
+            <form method="POST" action="item_update/{{row[0]}}">
+              
+            <div class="input-fields">
+
+              <label for="item" class="hi">Item:</label>
+              <input type="text" id="name" name="item" value="{{row[1]}}"><br><br>
+
+              <label for="itemID">Item ID:</label>
+              <input type="number" id="itemID" name="itemID" value="{{row[2]}}"><br><br>
+
+              <label for="price">Price:</label>
+              <input type="number" id="price" name="price" value="{{row[3]}}"><br><br>
+
+              <label for="cost">Cost:</label>
+              <input type="number" id="cost" name="cost" value="{{row[4]}}"><br><br>
+
+              <label for="inventory">Inventory:</label>
+              <input type="number" id="inventory" name="inventory" value="{{row[5]}}"><br><br>
+
+              <label for="contact">Order Contact:</label>
+              <input type="tel" id="contact" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="{{row[6]}}">
+            </div>
+              
+            <button id="save-changes" href="#">Save Changes</button> 
+
+          </form>
+
+          </div>
+        </div>
+        {% endfor %}
+
+
+        <!--creating the item profile popup-->
+        {%  for row in items  %}
+        <div id="profile_{{  row[0]  }}" class="profile">
+          <div class="profile-content">
+
+            <h2>{{  row[1]  }}</h2>
+
+            <div class="profile-fields">
+              
+              <p class="emp-details">Item ID: {{  row[2]  }}</p> <!--do not change class to item-details!-->
+              
+              <p class="emp-details">Price: ${{  row[3]  }}</p>
+
+              <p class="emp-details">Cost: ${{  row[4]  }}</p>
+
+              <p class="emp-details">Inventory: {{  row[5]  }}</p>
+
+              <p class="emp-details">Order Contact: {{  row[6]  }}</p>
+            </div>
+
+            <div>
+              <button onclick="editprofile('{{row[0]}}')" class="profile-button" id="edit-button">Edit</button>
+              <button onclick="openConfirm('{{row[0]}}')" class="profile-button" id="openConfirm">Delete</button>
+            </div>
+          </div>
+        </div>
+        {%  endfor  %}
+
+        <!--creating the delete confirmation popup-->
+        {% for row in items %}
+        <div id="confirm_{{row[0]}}" class="confirm">
+          <div class="confirm-content">
+            <p class="confirm-text">Are you sure you want to permanently delete this item entry?</p>
+            <div>
+              <a href="/item_delete/{{row[0]}}"><button class="confirm-button" id="yes-button">Yes</button></a>
+              <button class="confirm-button" id="no-button_{{row[0]}}">No</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+   
+
+<!--creating table-->
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>ID</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in items %}
+          <tr>
+            <td><a onclick="viewprofile('{{row[0]}}')" id="openProfile" class="name-link">{{ row[1] }}</a></td>
+            <td>{{  row[2]  }}</td>
+            <td>${{  row[3]  }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    
+      </table>
+    </div>
+
+    </div>
+
+    <!--popup code - https://www.geeksforgeeks.org/how-to-create-popup-box-using-html-and-css/-->
+ <script>
+      const openPopup = document.getElementById('openPopup');
+      const closePopup = document.getElementById('closePopup');
+      const popup = document.getElementById('popup');
+      
+
+      openPopup.addEventListener('click', () => {
+          popup.style.display = 'flex';
+      });
+
+
+      window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+      function viewprofile(id) {
+            
+            let x = 'profile_' + id;
+            let profile = document.getElementById(x);
+            profile.style.display = 'flex';
+
+            window.addEventListener('click', (event) => {
+              if (event.target === profile) {
+                profile.style.display = 'none';
+              }
+            })
+          };
+
+          function editprofile(id) {
+            
+            let view = 'profile_' + id;
+            let edit = 'edit_popup_' + id;
+            let profile = document.getElementById(view)
+            let editProfile = document.getElementById(edit);
+            editProfile.style.display = 'flex';
+            profile.style.display = 'none';
+
+            window.addEventListener('click', (event) => {
+              if (event.target === editProfile) {
+                editProfile.style.display = 'none';
+              }
+            })
+          };
+
+          function openConfirm(id) {
+            
+            let x = 'confirm_' + id;
+            let no = 'no-button_' + id;
+            let erase  = document.getElementById(x);
+            let back = document.getElementById(no);
+
+            erase.style.display = 'flex';
+
+            window.addEventListener('click', (event) => {if (event.target === back) {
+              erase.style.display = 'none';
+            }})
+          };
+
+  </script>   
+
+  </body>
+
+</html>

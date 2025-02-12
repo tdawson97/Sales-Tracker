@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Sales Tracker</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  </head>
+
+
+  <body>
+    <div class="login">
+      <h1 class="login-header">Sales Tracker</h1>
+    </div>
+
+    <div class="login">
+      <form method="GET" action="/home"> <!--ADD ACTION HERE-->
+        <label class="login-label" for="username"> Username:</label><br>
+        <input class="login-input" type="text" id="username" name="username"><br><br>
+        <label class="login-label" for="password">Password:</label><br>
+        <input class="login-input" type="password" id="password" name="password"><br><br>
+
+        <div class="login">
+          <input id="login" class="login-button" type="submit" value="Login">
+        </div>
+      </form>
+    </div>
+
+    <div class="login">
+      <form method="GET" action="/signup">
+        <input type="submit" class="signup-button" value="Sign up">
+      </form>
+    </div>
+
+    <div class="login">
+      <p class="login-tagline">Sales tracking software for team and inventory management. Efficiently monitor sales progress towards team goals and adapt to business changes quickly with Sales Tracker!</p>
+    </div>
+
+  </body>
+</html>

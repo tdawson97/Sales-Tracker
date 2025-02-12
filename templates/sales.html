@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>Sales</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+<!--creating the nav bar-->  
+    <div class="nav">
+      <a href="/home">Home</a>
+      <a href="/employees">Employees</a>
+      <a href="/items">Items</a>
+      <a href="/sales">Sales</a>
+      <a href="/help">Help</a>
+      <a href="/">Log Out</a>
+    </div>
+
+    <div class="page">
+    <h2 class="heading">Sales</h2>
+
+<!--creating search and add bar-->
+    <div>
+      <form method="POST" action="/sales">
+        <input name="search" class="search-bar" type="text" placeholder="Search by item/name/order">
+        <button name="search-form" class="search-button" type="submit">Search</button>
+      </form>
+      <button id="openPopup" class="add">Add</button>
+
+<!--creating add sale popup-->
+        <div id="popup" class="popup">
+          <div class="popup-content">
+            
+            <h2>Sales Details</h2>
+            
+            <form method="POST" action="/sales">
+            
+            <div class="input-fields">
+
+              <label for="order">Order #:</label>
+              <input type="number" id="order" name="order"><br><br>
+
+              <label for="employee">Employee:</label><select id="employee" name="employee">
+                <option value="0">&nbsp;</option>
+                {%  for row in employees  %}
+                  <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+                </option>
+              </select>
+              <br><br>
+              
+              <!--https://www.geeksforgeeks.org/how-to-add-an-input-field-on-button-click-in-javascript/-->
+              <div class="container">
+                <div id="inputFields">
+                </div>
+                <a class="add-button" onclick="addFn()">Add Sale Item</a>
+                
+              </div><br>
+
+              <label for="amount">Total Amount:</label>
+              <input type="number" id="amount" name="amount"><br><br>
+
+              <label for="sale-date">Sale Date:</label>
+              <input type="date" id="sale-date" name="sale-date">
+
+            </div>
+            
+            <button id="closePopup">Add Item</button>
+            
+          </form>
+          </div>
+        </div>
+
+    </div>
+
+<!--creating table-->
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Employee</th>
+            <th>Item</th>
+            <th>Qty.</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in sales %}
+          <tr>
+            <td>{{  row[6] }}</td>
+            <td>{{ row[4]  }}</td>
+            <td>{{  row[7]  }}</td>
+            <td>{{  row[8]  }}</td>
+            <td>${{  row[5]  }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    
+      </table>
+    </div>
+
+    </div>
+
+    <!--popup code - https://www.geeksforgeeks.org/how-to-create-popup-box-using-html-and-css/-->
+ <script>
+  const openPopup = document.getElementById('openPopup');
+  const popup = document.getElementById('popup');
+
+  openPopup.addEventListener('click', () => {
+      popup.style.display = 'flex';
+  });
+
+  window.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    //https://www.geeksforgeeks.org/how-to-add-an-input-field-on-button-click-in-javascript/
+  var count = 0
+
+  function addFn() {
+            console.log(count)
+            count += 1;
+            console.log(count)
+            const divEle = document.getElementById("inputFields");
+            divEle.innerHTML += `
+          <div>
+            <label for="item-sold">Item:</label><select id="item-sold_`+count+`" name="item-sold_`+count+`" class="input-field">
+            <option value="0">&nbsp;</option>
+            {% for item in items %}
+            <option value="{{item[0]}}">
+              {{item[1]}}
+            </option>
+            {% endfor %}
+            </select>
+                
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity_`+count+`" name="quantity_`+count+`" class="input-field"><br><br>
+          </div>
+        `;
+          }
+  </script> 
+
+
+  </body>
+
+</html>

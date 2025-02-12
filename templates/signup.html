@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Sign up</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="login">
+      <h1 class="login-header">Sign up</h1>
+    </div>
+
+    <div class="login">
+      <form method="POST" action="/home"> <!--ADD ACTION HERE-->
+        <label class="login-label" for="firstname">First Name:</label><br>
+        <input class="login-input" type="text" id="firstname" name="firstname"><br><br>
+        <label class="login-label" for="lastname">Last Name:</label><br>
+        <input class="login-input" type="text" id="lastname" name="lastname"><br><br>
+        <label class="login-label" for="businessname">Business Name: </label><br>
+        <input class="login-input" type="text" id="businessname" name="businessname"><br><br>
+        <label class="login-label" for="username">Username:</label><br>
+        <input class="login-input" type="text" id="username" name="username"><br><br>
+        <label class="login-label" for="password">Password:</label><br>
+        <input class="login-input" type="text" id="password" name="password"><br><br>
+
+        <div class="login">
+          <input class="login-button" type="submit" value="Sign Up">
+        </div>
+      </form>
+  </div>
+  </body>
+</html>
