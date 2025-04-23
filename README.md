@@ -8,7 +8,7 @@ The program utilizes a microservice architecture, with microservices providing t
 
 ## Pages
    ## Welcome Page
-      !(screenshots/welcome.png)
+   ![](screenshots/welcome.png)
    ## Sign up Page
 
    ## Home Page
