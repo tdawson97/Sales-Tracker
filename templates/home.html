@@ -85,6 +85,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
       //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_click
 
       function itemFunction() {
@@ -121,13 +122,14 @@
 
 
       const itemData = {
-        labels: ["Chair", "Rug", "Sofa", "Dining Table", "Bookcase"],
-        data: [30, 17, 10, 7, 36],
+        labels: {{item|tojson}},
+        data: JSON.parse('{{item_percentages}}'),
       };
       const empData = {
-        labels: ["John Doe", "Beatrice Bello", "Clara Medlin", "Ronald Lewis", "Lisette Wood"],
-        data: [15, 18, 26, 22, 19],
+        labels: {{name|tojson}},
+        data: JSON.parse('{{emp_percentages}}'),
       };
+      console.log(empData)
 
       const itemChart = document.querySelector(".item-chart");
       const itemLegend = document.querySelector(".item-stats .item-details .item-list");

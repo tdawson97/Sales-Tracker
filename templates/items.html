@@ -20,11 +20,15 @@
 
 <!--creating search and add bar-->
     <div>
+    <div>
       <form method="POST" action="/items">
         <input name="search" class="search-bar" type="text" placeholder="Search by item or ID">
         <button name="search-form" class="search-button" type="submit">Search</button>
       </form>
       <button id="openPopup" class="add">Add</button>
+      <form method="POST" action="/items"><button class="sort" name="LH">Sort Low-High</button>
+        <button class="sort" name="HL">Sort High-Low</button></form>
+        </div>
 
 
 <!--creating the add item popup-->
@@ -162,7 +166,7 @@
         </thead>
 
         <tbody>
-          {% for row in items %}
+          {% for row in amounts %}
           <tr>
             <td><a onclick="viewprofile('{{row[0]}}')" id="openProfile" class="name-link">{{ row[1] }}</a></td>
             <td>{{  row[2]  }}</td>

@@ -20,14 +20,19 @@
 
 <!--creating search and add bar-->
       <div>
+        <div>
         <form method="POST" action="/employees">
           <input name="search" class="search-bar" type="text" placeholder="Search by name or ID">
           <button name="search-form" class="search-button" type="submit">Search</button>
         </form>
         <button id="openPopup" class="add">Add</button>
+        <form method="POST" action="/employees"><button class="sort" name="AZ">Sort A-Z</button>
+        <button class="sort" name="ZA">Sort Z-A</button></form>
+        </div>
+      
 
 
-<!--creating the add employee popup-->
+        <!--creating the add employee popup-->
         <div id="popup" class="popup">
           <div class="popup-content">
               
@@ -69,7 +74,7 @@
         </div>
 
 
-<!--creating the edit profile popup-->
+        <!--creating the edit profile popup-->
         {% for row in employees %}
         <div id="edit_popup_{{  row[0]  }}" class="edit-popup">
           <div class="popup-content">
@@ -111,10 +116,10 @@
           </div>
         </div>
 
-      {% endfor %}
+        {% endfor %}
 
 
-<!--creating the view profile popup-->
+        <!--creating the view profile popup-->
         {% for row in employees %}
           <div id="profile_{{  row[0]  }}" class="profile">
             <div class="profile-content">
@@ -145,7 +150,7 @@
         {% endfor %}
 
 
-<!--creating the delete confirmation popup-->
+        <!--creating the delete confirmation popup-->
         {% for row in employees %}
         <div id="confirm_{{row[0]}}" class="confirm">
           <div class="confirm-content">
@@ -157,11 +162,11 @@
           </div>
         </div>
         {% endfor %}
-      </div>
+        </div>
 
 
-<!--creating table-->
-      <div class="table">
+        <!--creating table-->
+        <div class="table">
         <table>
           <thead>
           <tr>
@@ -173,7 +178,7 @@
           
           <tbody>
 
-            {% for row in employees %}
+            {% for row in names %}
             <tr>
               <td><a onclick="viewprofile('{{row[0]}}')" id="openProfile" class="name-link">{{ row[1] }}</a></td>
               <td>{{  row[2]  }}</td>
@@ -184,9 +189,9 @@
         </tbody>
 
         </table>
-      </div>
+        </div>
 
-    </div>
+        </div>
     
 
 

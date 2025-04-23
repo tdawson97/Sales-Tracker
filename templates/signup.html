@@ -21,9 +21,24 @@
         <input class="login-input" type="text" id="username" name="username"><br><br>
         <label class="login-label" for="password">Password:</label><br>
         <input class="login-input" type="text" id="password" name="password"><br><br>
+        <label class="login-label" for="re-password">Reenter Password:</label><br>
+        <input class="login-input" type="text" id="re-password" name="re-password"><br><br>
+
+      </div class='login'>
+      <div>
+        {% with msg = get_flashed_messages() %}
+        {% if msg %}
+        {% for message in msg %}
+        <div class="flash-message" role="alert">
+          <strong>{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
 
         <div class="login">
-          <input class="login-button" type="submit" value="Sign Up">
+          <input class="login-button" type="submit" name="signUp" value="Sign Up">
         </div>
       </form>
   </div>

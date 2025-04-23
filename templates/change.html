@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Change Password</title>
+    <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+
+  <!--creating the nav bar-->  
+  <div class="nav">
+    <a href="/home">Home</a>
+    <a href="/employees">Employees</a>
+    <a href="/items">Items</a>
+    <a href="/sales">Sales</a>
+    <a href="/help">Help</a>
+    <a href="/">Log Out</a>
+  </div>
+
+    <div class="login">
+      <h1 class="login-header">Change Password</h1>
+    </div>
+
+    
+
+    <div class="login">
+      <form method="POST" action="/change"> <!--ADD ACTION HERE-->
+        
+        <label class="login-label" for="username">Username:</label><br>
+        <input class="login-input" type="text" id="username" name="username"><br><br>
+
+        <label class="login-label" for="password">Current Password:</label><br>
+        <input class="login-input" type="text" id="password" name="password"><br><br>
+
+        <label class="login-label" for="newPassword">New Password:</label><br>
+        <input class="login-input" type="text" id="newPassword" name="newPassword"><br><br>
+
+        <div class="login">
+          <input class="password-button" type="submit" value="Change Password">
+        </div>
+      </form>
+
+      
+  </div class='login'>
+    <div>
+      {% with msg = get_flashed_messages() %}
+      {% if msg %}
+      {% for message in msg %}
+      <div class="flash-message" role="alert">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+      
+  </body>
+</html>

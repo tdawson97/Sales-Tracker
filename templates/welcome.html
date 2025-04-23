@@ -11,14 +11,14 @@
     </div>
 
     <div class="login">
-      <form method="GET" action="/home"> <!--ADD ACTION HERE-->
+      <form method="POST" action="/home"> <!--ADD ACTION HERE-->
         <label class="login-label" for="username"> Username:</label><br>
         <input class="login-input" type="text" id="username" name="username"><br><br>
         <label class="login-label" for="password">Password:</label><br>
         <input class="login-input" type="password" id="password" name="password"><br><br>
 
         <div class="login">
-          <input id="login" class="login-button" type="submit" value="Login">
+          <input id="login" class="login-button" name="Login" type="submit" value="Login">
         </div>
       </form>
     </div>
