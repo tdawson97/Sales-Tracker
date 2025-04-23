@@ -7,21 +7,21 @@ This web app is an original project made for CS361 at Oregon State University. T
 The program utilizes a microservice architecture, with microservices providing the function of user credential validation and initial sign up, statistics calculation, and item sorting.
 
 ## Pages
-   ## Welcome Page
+   ### Welcome Page
    ![screenshot](screenshots/welcome.png)
-   ## Sign up Page
+   ### Sign up Page
    ![screenshot](screenshots/sign-up.png)
-   ## Home Page
+   ### Home Page
    ![screenshot](screenshots/home.png)
-   ## Employees Page
+   ### Employees Page
    ![screenshot](screenshots/employees.png)
    ![screenshot](screenshots/employees-popup.png)
-   ## Item Page
+   ### Item Page
    ![screenshot](screenshots/items.png)
    ![screenshot](screenshots/items-popup.png)
-   ## Sales Page
+   ### Sales Page
    ![screenshot](screenshots/sales.png)
-   ## Help Page
+   ### Help Page
    ![screenshot](screenshots/help.png)
 ## Authors
 Tanner Dawson
