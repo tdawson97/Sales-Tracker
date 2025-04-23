@@ -8,19 +8,21 @@ The program utilizes a microservice architecture, with microservices providing t
 
 ## Pages
    ## Welcome Page
-   ![](screenshots/welcome.png)
+   ![screenshot](screenshots/welcome.png)
    ## Sign up Page
-
+   ![screenshot](screenshots/sign-up.png)
    ## Home Page
-
+   ![screenshot](screenshots/home.png)
    ## Employees Page
-
+   ![screenshot](screenshots/employees.png)
+   ![screenshot](screenshots/employees-popup.png)
    ## Item Page
-
+   ![screenshot](screenshots/items.png)
+   ![screenshot](screenshots/items-popup.png)
    ## Sales Page
-
+   ![screenshot](screenshots/sales.png)
    ## Help Page
-
+   ![screenshot](screenshots/help.png)
 ## Authors
 Tanner Dawson
 
