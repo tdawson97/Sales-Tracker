@@ -16,7 +16,7 @@ body {
   background-color: #e6e6e6;
 }
 
-.add, .search-button {
+.add, .search-button, .sort{
   border: black solid;
   border-radius: 10px;
   padding: 10px;
@@ -30,7 +30,7 @@ body {
   float: right;
 }
 
-.add:hover, .search-button:hover{
+.add:hover, .search-button:hover, .sort:hover{
   background-color: #ff914d;
   cursor: pointer;
 }
@@ -303,7 +303,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_cl
   color: #ff914d;
 }
 
-.login-label {
+.login-label, .flash-message {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,7 +318,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_cl
   width: 250px;
 }
 
-.login-button, .signup-button {
+.login-button, .signup-button, .password-button {
   width: 200px;
   font-family: "Rubik", sans-serif;
   font-size: 24;
@@ -326,6 +326,10 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_dropdown_navbar_cl
   padding: 10px;
   border-radius: 20px;
   background-color: #ff914d;
+}
+
+.password-button {
+  width: 250px;
 }
 
 .name-link {
