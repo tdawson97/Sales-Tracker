@@ -23,8 +23,12 @@ The program utilizes a microservice architecture, with microservices providing t
    ![screenshot](screenshots/sales.png)
    ### Help Page
    ![screenshot](screenshots/help.png)
+   
 ## Authors
 Tanner Dawson
+
+## How to Run
+The microservice programs (Alphabet Sorting, Stats Calculator, User, Validation) are set up to run locally on ports 6000, 7000, 5000, and 8000 respectively. The Sales Tracker program is set up to run locally on port 7862.
 
 ## Version History
 * 1.0
